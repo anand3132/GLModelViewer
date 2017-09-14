@@ -83,7 +83,7 @@ int main() {
     
     // build and compile shaders
     // -------------------------
-    Shader glShader("VertexShader.shd", "FragmentShader.shd");
+    Shader myGlShader("VertexShader.shd", "FragmentShader.shd");
     
     // load models
     // -----------
@@ -123,20 +123,20 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         // don't forget to enable shader before setting uniforms
-        ourShader.use();
+        myGlShader.use();
         
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
-        ourShader.setMat4("projection", projection);
-        ourShader.setMat4("view", view);
+        myGlShader.setMat4("projection", projection);
+        myGlShader.setMat4("view", view);
         
         // render the loaded model
         glm::mat4 model;
         model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
         model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
-        ourShader.setMat4("model", model);
-        ourModel.Draw(ourShader);
+        myGlShader.setMat4("model", model);
+        ourModel.Draw(myGlShader);
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
